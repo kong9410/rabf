@@ -1,4 +1,5 @@
 import { Box, Button, Container, FormControl, TextField } from "@mui/material";
+import axios from "axios";
 import { useState } from "react";
 
 const inputStyle = {
@@ -23,11 +24,28 @@ const UserRegisterPage = () => {
     };
 
     const onClickRegister = () => {
-        if(isInvalid()) {
+        if (isInvalid()) {
             return;
         }
 
-        console.log("register!");
+        axios({
+            method: "post",
+            url: "/register/user",
+            data: {
+                account: account,
+                password: password
+            }
+        })
+            .then(function (response) {
+                alert(response);
+            })
+            .catch(error => {
+                if (error.response.data.errorType === "USER_ALREADY_EXISTS") {
+                    alert("이미 존재하는 아이디 입니다.");
+                } else {
+                    alert("서버에서 오류가 발생했습니다.");
+                }
+            });
     }
 
     const isInvalid = () => {
@@ -66,7 +84,7 @@ const UserRegisterPage = () => {
 
     return (
         <Container maxWidth="sm">
-            <Box style={{"margin-top" : "10em"}}>
+            <Box style={{ "margin-top": "10em" }}>
                 <FormControl fullWidth>
                     <TextField
                         label="account"
