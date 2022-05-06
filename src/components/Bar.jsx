@@ -1,42 +1,48 @@
-import { AppBar, Button, Container, Toolbar, Typography } from '@mui/material';
-import { Box } from '@mui/system';
-import * as React from 'react';
-import { Link } from 'react-router-dom';
+import * as React from "react";
+import { Link } from "react-router-dom";
+import styledComponents from "styled-components";
 
-const pages = [
-    {
-        menuName: "product",
-        path: "/product"
-    },
-    {
-        menuName: "login",
-        path: "/login"
-    }
-];
+const StyledBarWrapper = styledComponents.div`
+    display: block;
+    background-color: rgb(129, 131, 235);
+`;
 
-const Bar = () => {
+const StyledBar = styledComponents.div`
+    width: 1300px;
+    min-width: 1300px;
+    height: 2em;
+    margin: 0 auto;
+`;
+
+const StyledButton = styledComponents.button`
+    width: 6em;
+    height: 100%;
+    background: none;
+    border: 0;
+    margin-right: 2px;
+    color: white;
+    cursor: pointer;
+`;
+
+const Bar = ({ pageList }) => {
     return (
-        <AppBar position="static">
-            <Container maxWidth="x1">
-                <Toolbar disableGutters>
-                    <Typography variant="h6" noWrap component="div">LOGO</Typography>
-
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page, index) => (
-                            <Link exact="true" to={page.path} key={index} style={{textDecoration: "none"}}>
-                                <Button
-                                    key={page.menuName}
-                                    sx={{ my: 2, color: 'white', display: 'block' }}
-                                >
-                                    {page.menuName}
-                                </Button>
-                            </Link>
-                        ))}
-                    </Box>
-                </Toolbar>
-            </Container>
-        </AppBar>
-    )
-}
+        <StyledBarWrapper>
+            <StyledBar>
+                {pageList.map((page, index) => (
+                    <Link
+                        exact="true"
+                        to={page.path}
+                        key={index}
+                        style={{ textDecoration: "none" }}
+                    >
+                        <StyledButton key={page.menuName}>
+                            {page.menuName}
+                        </StyledButton>
+                    </Link>
+                ))}
+            </StyledBar>
+        </StyledBarWrapper>
+    );
+};
 
 export default Bar;
