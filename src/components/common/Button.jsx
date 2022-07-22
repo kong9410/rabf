@@ -24,7 +24,12 @@ const StyledButton = styledComponents.button`
 
 const Button = ({ children, onClick, primary, display }) => {
     return (
-        <StyledButton primary={primary} onClick={onClick} display={display}>
+        <StyledButton
+            primary={primary}
+            onClick={onClick}
+            display={display}
+            type="button"
+        >
             {children}
         </StyledButton>
     );

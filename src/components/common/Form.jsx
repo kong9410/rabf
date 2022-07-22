@@ -22,7 +22,7 @@ const StyledDiv = styledComponents.div`
 
 const Form = ({ children, name, componentsCenter, half }) => {
     return (
-        <StyledForm name={name} half={half}>
+        <StyledForm name={name} half={half} autoComplete="off">
             <StyledDiv componentsCenter={componentsCenter}>
                 {children}
             </StyledDiv>

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Link } from "react-router-dom";
 import styledComponents from "styled-components";
 
@@ -24,7 +23,7 @@ const StyledButton = styledComponents.button`
     cursor: pointer;
 `;
 
-const Bar = ({ pageList }) => {
+const Bar = ({ pageList, auth }) => {
     return (
         <StyledBarWrapper>
             <StyledBar>
@@ -40,6 +39,13 @@ const Bar = ({ pageList }) => {
                         </StyledButton>
                     </Link>
                 ))}
+                <Link
+                    exact="true"
+                    to={auth.path}
+                    style={{ textDecoration: "none" }}
+                >
+                    <StyledButton>{auth.menuName}</StyledButton>
+                </Link>
             </StyledBar>
         </StyledBarWrapper>
     );

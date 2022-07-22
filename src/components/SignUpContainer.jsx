@@ -18,14 +18,14 @@ const SignUpContainer = () => {
 
         axios({
             method: "post",
-            url: "/signup",
+            url: "/api/signup",
             data: {
                 username: username,
                 password: password,
             },
         })
-            .then(function (response) {
-                alert(response);
+            .then(function () {
+                window.location.href = "/signin";
             })
             .catch((error) => {
                 if (!error.response) {

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
+import setAuthorizationToken from "../lib/setAuthorizationToken";
 import SignInPage from "./SignInPage";
 
 const SignInContainer = () => {
@@ -17,17 +18,25 @@ const SignInContainer = () => {
 
         axios({
             method: "post",
-            url: "/signin",
+            url: "/api/signin",
             data: {
                 username: username,
                 password: password,
             },
         })
             .then(function (response) {
-                alert(response);
+                const token = response.data.token;
+                localStorage.setItem("token", token);
+                setAuthorizationToken(token);
+
+                window.location.href = "/";
             })
             .catch((error) => {
-                alert("서버에서 오류가 발생했습니다.");
+                if (error.response.status === 401) {
+                    alert("인증 실패");
+                } else {
+                    alert("서버에서 오류가 발생했습니다.");
+                }
             });
     };
 

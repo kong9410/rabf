@@ -4,22 +4,9 @@ import { Link } from "react-router-dom";
 import styledComponents from "styled-components";
 import { setPassword, setUsername } from "../modules/signin";
 import Button from "./common/Button";
+import Form from "./common/Form";
 import Input from "./common/Input";
 import Label from "./common/Label";
-
-const SignInSection = styledComponents.div`
-    width: 96%;
-    height: 96%;
-    padding: 2%;
-`;
-
-const SignInForm = styledComponents.form`
-    padding: 10px 0;
-    max-width: 400px;
-    font-size: 12pt;
-    margin: 0 auto;
-    border: 1px gray;
-`;
 
 const SignInP = styledComponents.p`
     diplay: block;
@@ -44,36 +31,34 @@ const SignInPage = ({ onSubmit }) => {
     );
 
     return (
-        <SignInSection>
-            <SignInForm>
-                <Label htmlFor="username" block>
-                    username
-                </Label>
-                <Input
-                    id="username"
-                    value={username}
-                    onChange={onUsernameChange}
-                    block
-                />
-                <Label htmlFor="password" block>
-                    password
-                </Label>
-                <Input
-                    id="password"
-                    value={password}
-                    type="password"
-                    onChange={onPasswordChange}
-                    block
-                />
-                <Button onClick={onSubmit} primary block>
-                    LOGIN
-                </Button>
+        <Form half>
+            <Label htmlFor="username" block>
+                username
+            </Label>
+            <Input
+                id="username"
+                value={username}
+                onChange={onUsernameChange}
+                block
+            />
+            <Label htmlFor="password" block>
+                password
+            </Label>
+            <Input
+                id="password"
+                value={password}
+                type="password"
+                onChange={onPasswordChange}
+                block
+            />
+            <Button onClick={onSubmit} primary block>
+                LOGIN
+            </Button>
 
-                <Link exact="true" to="/signup">
-                    <SignInP>signup</SignInP>
-                </Link>
-            </SignInForm>
-        </SignInSection>
+            <Link exact="true" to="/signup">
+                <SignInP>signup</SignInP>
+            </Link>
+        </Form>
     );
 };
 

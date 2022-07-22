@@ -1,18 +1,27 @@
 import Bar from "./Bar";
 
-const pageList = [
-    {
-        menuName: "product",
-        path: "/product",
-    },
-    {
-        menuName: "signin",
-        path: "/signin",
-    },
-];
-
 const BarContainer = () => {
-    return <Bar pageList={pageList} />;
+    const pageList = [
+        {
+            menuName: "product",
+            path: "/product",
+        },
+    ];
+
+    let auth;
+    if (localStorage.jwtToken) {
+        auth = {
+            menuName: "signin",
+            path: "/signin",
+        };
+    } else {
+        auth = {
+            menuName: "logout",
+            path: "/logout",
+        };
+    }
+
+    return <Bar pageList={pageList} auth={auth} />;
 };
 
 export default BarContainer;
